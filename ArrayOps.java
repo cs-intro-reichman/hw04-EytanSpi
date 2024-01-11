@@ -1,9 +1,6 @@
 public class ArrayOps {
     public static void main(String[] args) {
-        
-        System.out.println();
-        System.out.println(containsTheSameElements(new int[] {3, -4, 1, 5}, new int[] {1, 3, -4, 2, 5}));
-        System.out.println();
+       
     }
     
     // Input: array with integers.
