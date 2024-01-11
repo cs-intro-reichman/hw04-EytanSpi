@@ -89,13 +89,14 @@ public class StringOps {
     }
 
     public static void printArray (int[] array) {
-        System.out.print("array = {");
-        for (int i = 0; i < array.length; i++) {
-            System.out.print(array[i] + ", ");
+        System.out.print("{"); 
+        if (array.length > 0) {
+            System.out.print(array[0]);
+            for (int i = 1; i < array.length; i++) {
+                System.out.print(", " + array[i]);
+            }
         }
-        System.out.print("}");
-        System.out.println();
+        System.out.println("}");
     }
-
-
+    
 }
