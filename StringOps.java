@@ -29,9 +29,13 @@ public class StringOps {
         if (string.length() == 0) {
             return ("");
         }
+        int startIndex = 0;
+        while (startIndex < string.length() && string.charAt(startIndex) == ' ') { // to ignore spaces before the first word
+            startIndex++;
+        }
         String result = "";
         boolean capitalizeNext = false;     // so that first letter will be lowercase
-        for (int i = 0; i < string.length(); i++) {
+        for (int i = startIndex; i < string.length(); i++) {
             char currentLetter = string.charAt(i);
             if (currentLetter == ' ') {     // capitalize after spaces and don't add to result
                 capitalizeNext = true;
@@ -98,5 +102,5 @@ public class StringOps {
         }
         System.out.println("}");
     }
-    
+
 }
