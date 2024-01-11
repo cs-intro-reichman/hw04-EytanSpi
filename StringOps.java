@@ -1,42 +1,106 @@
 public class StringOps {
-    ////////////////////////////////////////////////////////////
-    //////                                               ///////
-    //////              Reminder:                        ///////
-    //////        allowed methods                        ///////
-    //////                                               ///////
-    //////        1.charAt(int index)                    ///////
-    //////        2.length()                             ///////
-    //////        3.substring(int start)                 ///////
-    //////        4.substring(int start,int ends)        ///////
-    //////        5.indexOf(String str)                  ///////
-    //////                                               ///////
-    //////        The rest are not allowed !             ///////
-    //////        if you want to use a different         ///////
-    //////        method, and you can implement          ///////
-    //////        it using material from the course      ///////
-    //////        you need to implement a version of     ///////
-    //////        the function by yourself.              ///////
-    //////                                               ///////
-    //////        see example for substring              ///////
-    //////        in Recitation 3 question 5             ///////
-    //////                                               ///////
-    ////////////////////////////////////////////////////////////
+   
     public static void main(String[] args) {
-        
+
     }
 
+    // Input: String
+    // Output: same string but capitalizes all vowels and makes all consonants lowercase.
     public static String capVowelsLowRest (String string) {
-        // Write your code here:
-        return "";
+        String result = "";
+        String vowels = "aeiouAEIOU";
+        for (int i = 0; i < string.length(); i++) {
+            char currentLetter = string.charAt(i);
+            if(vowels.indexOf(currentLetter) == -1) {   // currentLetter isn't a vowel
+                result += toLowercase(currentLetter);
+            } else {                                    // currentLetter is a vowel
+                result += capitalize(currentLetter);
+            }
+        }
+        return result;
     }
 
+    // Input: string
+    // Output: 1) lowercase the first letter of first word
+    //         2) first letters of all other words will be capitalized
+    //         3) all other letters will be lowercase
+    //         4) all spaces are removed
     public static String camelCase (String string) {
-        // Write your code here:
-        return "";
+        if (string.length() == 0) {
+            return ("");
+        }
+        int startIndex = 0;
+        while (startIndex < string.length() && string.charAt(startIndex) == ' ') { // to ignore spaces before the first word
+            startIndex++;
+        }
+        String result = "";
+        boolean capitalizeNext = false;     // so that first letter will be lowercase
+        for (int i = startIndex; i < string.length(); i++) {
+            char currentLetter = string.charAt(i);
+            if (currentLetter == ' ') {     // capitalize after spaces and don't add to result
+                capitalizeNext = true;
+            } else {                        // else add to result and next letter should be lowercase
+                if(capitalizeNext) {
+                    result += capitalize(currentLetter); 
+                } else {         
+                    result += toLowercase(currentLetter); 
+                }
+                capitalizeNext = false;
+            }
+        }
+        return result;
     }
 
     public static int[] allIndexOf (String string, char chr) {
-        // Write your code here:
-        return new int[1];
+        int counter = 0;     //counts needed length for future array (result)
+        for (int i = 0; i < string.length(); i++) {
+            if (string.charAt(i) == chr) {
+                counter ++;
+            }
+        }
+        int[] result = new int[counter];
+        int placement = 0;
+        for (int i = 0; i < string.length(); i++) {
+            if (string.charAt(i) == chr) {
+                result[placement++] = i;
+            }
+        }
+        return result;
     }
+    
+    // Input: char
+    // Output: capital form of the letter
+    //         does not change other chars
+    public static char capitalize(char c) {
+        if ('a' <= c && c <= 'z') {
+            // turn lowercase letters to capital
+            int letterIndex = (c - 'a');
+            return ((char) ('A' + letterIndex));
+        }
+        return c; // needed for compilation
+    }
+
+    // Input: char
+    // Output: lower case form of the letter
+    //         does not change other chars
+     public static char toLowercase(char c) {
+        if ('A' <= c && c <= 'Z') {
+            // turn capital letters to lowercase
+            int letterIndex = (c - 'A');
+            return ((char) ('a' + letterIndex));
+        }
+        return c; // needed for compilation
+    }
+
+    public static void printArray (int[] array) {
+        System.out.print("{"); 
+        if (array.length > 0) {
+            System.out.print(array[0]);
+            for (int i = 1; i < array.length; i++) {
+                System.out.print(", " + array[i]);
+            }
+        }
+        System.out.println("}");
+    }
+
 }
